@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <section class="container">
+
+        <section class="header">
+            <h1>Task Manager</h1>
+        </section>
+        <div class="message" id="message">
+            error
+        </div>
+        <section class="uncompleted">
+            <div>
+                <h1>Uncompleted Tasks <span id="num1">(0)</span></h1>
+
+
+                <a href="create.html"><button>Add Task</button></a>
+
+            </div>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created Date</th>
+                        <th>Due Date</th>
+
+                    </tr>
+                </thead>
+                <tbody id="unc">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+
+        </section>
+        <section class="completed">
+
+            <h1>Completed Tasks <span id="num2">(0)</span></h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created Date</th>
+                        <th>Completed Date</th>
+                        <th>Due Date</th>
+
+                    </tr>
+                </thead>
+                <tbody id="com">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+
+        </section>
+
+    </section>
+
+
+    <script>
+
+        function goToEdit(id) {
+            window.location.href = '/Task_Manager_Frontend/edit.html?id=' + id
+        }
+
+        function changeurl() {
+            var newURL = location.href.split("?")[0];
+            window.history.pushState('object', document.title, newURL);
+
+        }
+
+        const updated = new URLSearchParams(window.location.search).get('updated');
+        const deleted = new URLSearchParams(window.location.search).get('deleted');
+        const created = new URLSearchParams(window.location.search).get('created');
+        const message = document.getElementById('message')
+        let tasks;
+        let uncompleted = "";
+        let completed = "";
+        let uncompleted_num = 0;
+        let completed_num =  0;
+
+        if (updated == "true") {
+            message.classList.add('show')
+            message.innerHTML = "Task Updated!"
+        } else if (deleted == "true") {
+            message.classList.add('show')
+            message.innerHTML = "Task Deleted!"
+        } else if (created == "true") {
+            message.classList.add('show')
+            message.innerHTML = "New Task Added!"
+        }
+
+        function remove() {
+            document.getElementById('message').classList.remove('show')
+            changeurl()
+        }
+
+        const hide_message = setTimeout(remove, 2000)
+
+        fetch('http://127.0.0.1:5000/api/v1/tasks')
+            .then(response => response.json())
+            .then(response => {
+                tasks = response.task
+                for (let task in tasks) {
+                    if (tasks[task].status == false) {
+                        uncompleted += `<tr onclick='goToEdit(${tasks[task].id})'><td>${tasks[task].title} </td><td>${tasks[task].description}</td><td>${tasks[task].created_date}</td><td>${tasks[task].due_date}</td></tr>`;
+                        uncompleted_num += 1
+                    } else {
+                        completed += `<tr onclick='goToEdit(${tasks[task].id})'><td>${tasks[task].title} </td><td>${tasks[task].description}</td><td>${tasks[task].created_date}</td><td>${tasks[task].completed_date}</td><td>${tasks[task].due_date}</td></tr>`
+                        completed_num += 1
+                    }
+                }
+                document.getElementById("unc").innerHTML = uncompleted;
+                document.getElementById("com").innerHTML = completed;
+                document.getElementById("num1").innerHTML = `(${uncompleted_num})`;
+                document.getElementById("num2").innerHTML = `(${completed_num})`;
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+
+
+    </script>
+
+</body>
+
+</html>

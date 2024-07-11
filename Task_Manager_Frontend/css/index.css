@@ -1,0 +1,199 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+}
+
+table {
+    border-collapse: collapse;
+    width: 1050px;
+}
+
+td {
+    border: 1px solid rgba(219, 216, 216, 0.979);
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: #c5d3d342;
+}
+tr:hover {
+    background-color: #61686842;
+    cursor: pointer;
+}
+.uncompleted th {
+    border-left: 2px solid white;
+    background-color: rgb(255, 218, 6);
+    padding: 10px;
+    color: white;
+}
+.uncompleted th:first-child {
+    border-left: 2px solid rgb(255, 218, 6);
+    width: 200px;
+}
+.uncompleted th:nth-child(2), .completed th:nth-child(2) {
+    width: 500px;
+}
+.uncompleted div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.completed th {
+    border-left: 2px solid white;
+    background-color: rgb(17, 243, 9);
+    padding: 10px;
+    color: white;
+}
+
+.completed th:first-child {
+    border-left: 2px solid rgb(17, 243, 9);
+    width: 200px;
+}
+
+.header {
+    background-color: dodgerblue;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.container {
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+}
+
+.uncompleted {
+    width: 100%;
+    margin-bottom: 50px;
+}
+.completed {
+    width: 100%;
+}
+
+h1{
+    padding: 10px;
+}
+
+button{
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+   background-color: rgba(10, 75, 139, 0.993);
+}
+
+
+
+.form {
+    width: 80%;
+    padding: 40px;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: dodgerblue;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid dodgerblue;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid dodgerblue;
+    border-radius: 5px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.button1 {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#status {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+}
+
+h1 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+.header2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header2 button {
+    background-color: red;
+}
+
+.header2 button:hover {
+    background-color: rgb(151, 7, 7);
+}
+
+.message {
+    display: flex;
+    width: 100%;
+    border: 1px solid rgb(21, 214, 3);
+    height: 40px;
+    padding: 10px;
+    background-color: rgb(10, 243, 154);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.show {
+    display: block !important;
+}
